@@ -1,5 +1,5 @@
 <cfcomponent>
-	<cffunction name="getCardsQuery" access="remote" returnFormat="plain" returntype="string">
+	<cffunction name="getSwitchStates" access="remote" returnFormat="plain" returntype="string">
 		<!--- QUERY DB FOR ALL RESULTS --->
 	    <cfquery name="cards" datasource="MyAuCards">
 	        SELECT * 
@@ -10,9 +10,9 @@
                 <cfloop query="cards">
                     <cfif #cards.type# eq 'test'>
                         <cfif #cards.hidden# eq 1>
-                            <li class="text-center h-20 col-xxs-6 col-exs-4 col-sm-3 col-md-3 col-lg-3"><label for="#cards.id##cards.title#">#cards.title#</label><br/><input type="checkbox" name="#cards.id##cards.title#" data-size="small" data-on-text="+" data-off-text="-" data-on-color="success" data-off-color="default"></li>
+                            <li class="text-center h-20 col-xxs-6 col-exs-4 col-sm-3 col-md-3 col-lg-3"><label for="#cards.title#">#cards.title#</label><br/><input type="checkbox" name="#cards.title#" data-size="small" data-on-text="+" data-off-text="-" data-on-color="success" data-off-color="default"></li>
                         <cfelse>
-                            <li class="text-center h-20 col-xxs-6 col-exs-4 col-sm-3 col-md-3 col-lg-3"><label for="#cards.id##cards.title#">#cards.title#</label><br/><input type="checkbox" checked name="#cards.id##cards.title#" data-size="small" data-on-text="+" data-off-text="-" data-on-color="success" data-off-color="default"></li>
+                            <li class="text-center h-20 col-xxs-6 col-exs-4 col-sm-3 col-md-3 col-lg-3"><label for="#cards.title#">#cards.title#</label><br/><input type="checkbox" checked name="#cards.title#" data-size="small" data-on-text="+" data-off-text="-" data-on-color="success" data-off-color="default"></li>
                         </cfif>
                     </cfif>
                 </cfloop>
@@ -56,6 +56,24 @@
         </cfoutput>
         
     </cffunction>
+            
+    <cffunction name="switchInitialization" access="remote" returnFormat="plain" returntype="any">
+		<!--- QUERY DB FOR ALL RESULTS --->
+	    <cfquery name="cards" datasource="MyAuCards">
+	        SELECT * 
+	        FROM cards
+	    </cfquery>
+        <cfset titleString = ""/>
+        <cfoutput>
+            <cfloop query="cards">
+                <cfif #cards.type# eq 'test'>
+                    <cfset titleString &= "'" & #title# & "'," />
+                </cfif>
+            </cfloop>
+        </cfoutput>
+        <cfreturn titleString>
+    </cffunction>
+            
     <cffunction name="gushingGrannnies" access="remote" returnFormat="plain" returntype="string">
         <cfquery name="cards" datasource="MyAuCards">
 	        SELECT * 

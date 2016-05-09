@@ -6,7 +6,11 @@
     margin: 0px 0px 0px 0px !important;
 }
 .modal{
-    top: 20% !important;
+/*    top: 20% !important;*/
+    z-index: 10000 !important;
+}
+.modal-backdrop{
+    z-index: 9999 !important;
 }
 .modal-heading-style {
     background-color: #550d8b !important;
@@ -62,6 +66,23 @@
 
 .icons-bg-color i:hover{
   background-color: rgba(255,196,0,1);
+}
+
+/*For Bootstrap Tour*/
+.tour-backdrop {
+  z-index: 10001;
+}
+
+.tour-step-backdrop {
+  z-index: 10001;
+}
+
+.tour-step-background {
+  z-index: 10001;
+}
+
+.popover[class*="tour-"] {
+  z-index: 10001;
 }
 
 @media only screen and (max-width: 767px) and (min-width: 480px){

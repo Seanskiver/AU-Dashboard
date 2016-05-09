@@ -1,213 +1,68 @@
 console.log('hello world');
 
+// TODO: Make this more modular. 
+
 function initializeSwitches(){
-    $("[name='3News']").bootstrapSwitch();
-    $("[name='4Weather']").bootstrapSwitch();
-    $("[name='5Laundry']").bootstrapSwitch();
-    $("[name='6Mail']").bootstrapSwitch();
-    $("[name='7Quick Links']").bootstrapSwitch();
-    $("[name='8Dining Meals']").bootstrapSwitch();
-    $("[name='9Favorite Links']").bootstrapSwitch();
-    $("[name='14Meow Sauce']").bootstrapSwitch();
-    $("[name='15Jimmy Jim Jim']").bootstrapSwitch();
-    $("[name='16Sean']").bootstrapSwitch();
-    $("[name='17Dogs Woof']").bootstrapSwitch();
-    $("[name='18Quarter']").bootstrapSwitch();
-
-    $('input[name="3News"]').on('switchChange.bootstrapSwitch', function(event, state) {
-      //console.log(this); // DOM element
-      //console.log(event); // jQuery event
-      //console.log(state); // true | false
-      if($(this).is(':checked')){
-          var cardTitle = "News";
-          var hiddenValue = "false";  
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }else{
-          var cardTitle = "News";
-          var hiddenValue = "true";
-          $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
-                $(this).closest('.panel').remove();
-          });
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }
-    });
-    $('input[name="4Weather"]').on('switchChange.bootstrapSwitch', function(event, state) {
-      if($(this).is(':checked')){
-          var cardTitle = "Weather";
-          var hiddenValue = "false";
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }else{
-          var cardTitle = "Weather";
-          var hiddenValue = "true";
-          $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
-                $(this).closest('.panel').remove();
-          });
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }
-    });
-    $('input[name="5Laundry"]').on('switchChange.bootstrapSwitch', function(event, state) {
-      if($(this).is(':checked')){
-          var cardTitle = "Laundry";
-          var hiddenValue = "false";
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }else{
-          var cardTitle = "Laundry";
-          var hiddenValue = "true";
-          $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
-                $(this).closest('.panel').remove();
-          });
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }
-    });
-    $('input[name="6Mail"]').on('switchChange.bootstrapSwitch', function(event, state) {
-      if($(this).is(':checked')){
-          var cardTitle = "Mail";
-          var hiddenValue = "false";
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }else{
-          var cardTitle = "Mail";
-          var hiddenValue = "true";
-          $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
-                $(this).closest('.panel').remove();
-          });
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }
-    });
-
-    $('input[name="7Quick Links"]').on('switchChange.bootstrapSwitch', function(event, state) {
-      if($(this).is(':checked')){
-          var cardTitle = "Quick Links";
-          var hiddenValue = "false";
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }else{
-          var cardTitle = "Quick Links";
-          var hiddenValue = "true";
-          $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
-                $(this).closest('.panel').remove();
-          });
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }
-    });
-
-    $('input[name="8Dining Meals"]').on('switchChange.bootstrapSwitch', function(event, state) {
-      if($(this).is(':checked')){
-          var cardTitle = "Dining Meals";
-          var hiddenValue = "false";
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }else{
-          var cardTitle = "Dining Meals";
-          var hiddenValue = "true";
-          $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
-                $(this).closest('.panel').remove();
-          });
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }
-    });
-
-    $('input[name="9Favorite Links"]').on('switchChange.bootstrapSwitch', function(event, state) {
-      if($(this).is(':checked')){
-          var cardTitle = "Favorite Links";
-          var hiddenValue = "false";
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }else{
-          var cardTitle = "Favorite Links";
-          var hiddenValue = "true";
-          $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
-                $(this).closest('.panel').remove();
-          });
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }
-    });
-
-    $('input[name="14Meow Sauce"]').on('switchChange.bootstrapSwitch', function(event, state) {
-      if($(this).is(':checked')){
-          var cardTitle = "Meow Sauce";
-          var hiddenValue = "false";
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }else{
-          var cardTitle = "Meow Sauce";
-          var hiddenValue = "true";
-          $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
-                $(this).closest('.panel').remove();
-          });
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }
-    });
-
-    $('input[name="15Jimmy Jim Jim"]').on('switchChange.bootstrapSwitch', function(event, state) {
-      if($(this).is(':checked')){
-          var cardTitle = "Jimmy Jim Jim";
-          var hiddenValue = "false";
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }else{
-          var cardTitle = "Jimmy Jim Jim";
-          var hiddenValue = "true";
-          $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
-                $(this).closest('.panel').remove();
-          });
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }
-    });
-
-    $('input[name="16Sean"]').on('switchChange.bootstrapSwitch', function(event, state) {
-      if($(this).is(':checked')){
-          var cardTitle = "Sean";
-          var hiddenValue = "false";
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }else{
-          var cardTitle = "Sean";
-          var hiddenValue = "true";
-          $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
-                $(this).closest('.panel').remove();
-          });
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }
-    });
-
-    $('input[name="17Dogs Woof"]').on('switchChange.bootstrapSwitch', function(event, state) {
-      if($(this).is(':checked')){
-          var cardTitle = "Dogs Woof";
-          var hiddenValue = "false";
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }else{
-          var cardTitle = "Dogs Woof";
-          var hiddenValue = "true";
-          $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
-                $(this).closest('.panel').remove();
-          });
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }
-    });
-
-    $('input[name="18Quarter"]').on('switchChange.bootstrapSwitch', function(event, state) {
-      if($(this).is(':checked')){
-          var cardTitle = "Quarter";
-          var hiddenValue = "false";
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }else{
-          var cardTitle = "Quarter";
-          var hiddenValue = "true";
-          $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
-                $(this).closest('.panel').remove();
-          });
-          $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
-      }
-    });
+    var titles = [];
+    
+    $.get('cfc/test.cfc?method=switchInitialization', function(result){
+//        console.log(result);    
+        titles = result.split(',');
+        for(var i=0; i<titles.length; i++){
+            //initialize the switch itself
+            $("[name="+ titles[i] +"]").bootstrapSwitch();
+            //itinialize the on switch change
+            $("input[name="+ titles[i] +"]").on('switchChange.bootstrapSwitch', function(event, state) {
+//                console.log("switch name: " + this.name);
+                //console.log(this); // DOM element
+                //console.log(event); // jQuery event
+                //console.log(state); // true | false
+                if($(this).is(':checked')){
+                    var cardTitle = this.name;
+                    var hiddenValue = "false";  
+                    $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
+                }else{
+                    var cardTitle = this.name;
+                    var hiddenValue = "true";
+                    $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
+                        $(this).closest('.panel').remove();
+                    });
+                    $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
+                }//end if checked
+            });//end on switch change
+        }//end for loop
+    });//end get cards query
+    $('.modal-content').delay(300).fadeIn(1000); //move this to .done to remove the lag in loading...
 };//end InitializeFunction
 
+//Open the Control Panel and populate it with the proper switch settings
 $(".openCtrlPanel").on("tap",function(event){
     console.log("open the modal");
-    $.get('cfc/test.cfc?method=getCardsQuery', function(result){
+    $('.modal-content').fadeOut(0);
+    $.get('cfc/test.cfc?method=getSwitchStates', function(result){
         var html = $.parseHTML(result);
         $('.insertSwitches').empty();
         $('.insertSwitches').append(html);
         //$('.insertSwitches').innerHTML(html);
         initializeSwitches();
     });
-    $("#controlPanel").modal();
+    $(".controlPanel").modal();
 });
 
+function openCtrlPanel() {
+    console.log("open the modal function");
+    $('.modal-content').fadeOut(0);
+    $.get('cfc/test.cfc?method=getSwitchStates', function(result){
+        var html = $.parseHTML(result);
+        $('.insertSwitches').empty();
+        $('.insertSwitches').append(html);
+        //$('.insertSwitches').innerHTML(html);
+        initializeSwitches();
+    });
+    $(".controlPanel").modal("show");
+};
 
+//When the 'X' on a card is taped we update what it was and make the changes
 $(".closeCard").on("tap",function(event){
     var cardTitle = $(this).closest('.panel').find('.title').text();    
     var hiddenValue = true;
@@ -218,7 +73,128 @@ $(".closeCard").on("tap",function(event){
     $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
 });
 
-//$(".closeModal").on("tap",function(event){
+//Set the tour
+//docs: http://bootstraptour.com/api/
+//help for opening the modal with tour: http://stackoverflow.com/questions/35221860/bootstrap-tour-wont-load-on-a-modal
+var tour = new Tour({
+    debug: true,
+    orphan: true,
+    steps: [
+        {
+            //index of 0
+            element: "#step1",
+            title: "Welcome to the Dashboard Tour!",
+            content: "We'll be giving you a series of steps to show you how to use this page. 'Cause dumb people. Shall we begin?",
+            placement: "auto",
+            orphan: true,
+            backdrop: true,
+        },
+        {
+            //index of 1
+            element: "#step2",
+            title: "Your Control Panel",
+            content: "This little nifty cog wheel opens your control panel. He is one of two ways. Let me show you the other way.",
+            placement: "left auto",
+        },
+        {
+            //index of 2
+            element: "#step3",
+            title: "Your Control Panel Pt. 2",
+            content: "You can also open your control panel with this nifty floating button! Look at that amazing thing! So, do it. Now. NOW!",
+            placement: "left auto",
+            onNext: function (tour) {
+                if($('.controlPanel').hasClass('in') == true){
+                    
+                }else{
+                    openCtrlPanel();
+                    tour.goTo(4);
+                }
+            },
+        },
+        {   
+            //index of 3
+            element: "#step4",
+            title: "Control Panel",
+            content: "So, yeah, this is your control panel. It does things like, ya know... control things...",
+            placement: "bottom auto",
+            onNext: function (tour) {
+                tour.goTo(5);
+            },
+        },
+        {   
+            //index of 4
+            delay: 2000,  //needed to show the panel of the tour
+            element: "#step4",
+            title: "Control Panel",
+            content: "So, yeah, this is your control panel. It does things like, ya know... control things...",
+            placement: "bottom auto",
+        },
+        {
+            //index of 5
+            element: "#step5",
+            title: "Switches",
+            content: "These little do-dad's are the brains of the dashboard. They boss everything else around and tell things if they should be loved or not. Basicly they turn on your cards if you didn't get the metaphor.",
+            placement: "right auto",
+            onNext: function (tour) {
+                $(".controlPanel").modal("hide");
+            },
+        },
+        {
+            //index of 6
+            element: "#step6",
+            title: "It's the end and I'm sad",
+            content: "That concludes our tour of tour dashboard! I hope I didn't hurt your feelings and you took something away from this expereience! ~Love, your mystic tour buddy <3 P.S. Press 'End Tour' otherwise I'll keep on coming back to pester you!",
+            placement: "bottom auto",
+        }
+]});
+
+// Initialize the tour
+tour.init();
+
+//debug - remove (set to a button or trigger when done)
+function startBSTour(){
+    // Start the tour
+    tour.end();
+    tour.restart();
+};
+//debug - remove
+function stopTour(){
+    tour.end();
+}
+
+function startTour(){
+    var intro = introJs();
+      intro.setOptions({
+        steps: [
+          { 
+            intro: "Hello world!"
+          },
+          { 
+            intro: "You <b>don't need</b> to define element to focus, this is a floating tooltip."
+          },
+          {
+            element: document.querySelector('#step1'),
+            intro: "This is a tooltip.",
+            position: 'left'
+          },
+          {
+            element: document.querySelectorAll('#step2')[0],
+            intro: "Ok, wasn't that fun?",
+            position: 'right'
+          },
+          {
+            element: '#step3',
+            intro: 'More features, more fun.',
+            position: 'right'
+          }
+        ]
+      });
+      intro.start();
+};
+
+//When we close the Control Panel we need to re-populate the cards on screen to the new settings
+//more or less for adding cards.
+//$(".closeCtrlPanel").on("tap",function(event){
 //    $.get('cfc/test.cfc?method=gushingGrannnies', function(result){
 //        var html = $.parseHTML(result);
 //        $('#page').empty();

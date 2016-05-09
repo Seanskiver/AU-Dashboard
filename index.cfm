@@ -1,6 +1,8 @@
 <cfinclude template="/includes/portal/head-start.alfred">
 <!---Custom CSS--->
 <link href="css/bootstrap-switch.css" rel="stylesheet">
+<link href="css/bootstrap-tour.min.css" rel="stylesheet">
+<link href="css/introjs.min.css" rel="stylesheet">
 <link href="css/domCSSFile.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="css/cardStyle.css">
 <link rel="stylesheet" type="text/css" href="css/cardStyle.css">
@@ -24,26 +26,23 @@
 <script src="js/resize.js"></script>
 <script src="js/minimize-close.js"></script>
 
-
-
-
 <!-- Start modal -->
-<div class="modal fade panel-info" id="controlPanel" role="dialog">
+<div class="modal fade panel-info controlPanel" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-heading-style">
+      <div id="step4" class="modal-heading-style">
         <a class="close close-btn close-color-white" data-dismiss="modal"><i class="icon-close3"></i></a>
         <h4 class="panel-heading">Control Panel (Settings)</h4>
       </div>
       <div class="text-purple">
         <h6 class="text-center">Click the switch to add or remove cards to your dashboard.</h6>
-        <ul class="row insertSwitches" style="padding-bottom: 10px;">
-<!--            Body of the switches for control panel-->
+        <ul id="step5" class="row insertSwitches" style="padding-bottom: 10px;">
+        <!--Body of the switches for control panel-->
         </ul>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default closeModal" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default closeCtrlPanel" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -54,16 +53,21 @@
 <!-- Modules-->
 <section id="modules" class="page-section light-bg border-tb">
     
+<!--Testing for the tour plugin. Will need to be implimented on a "help" button or on page load for first time-->
+    <button onclick="startTour()">Start the Tour!</button>
+    <button id="step6" onclick="startBSTour()">Start BS Tour!</button>
+    <button onclick="stopTour()">Stop BS Tour!</button>
+    
 <!--    CF INCLUDE SEAN'S CFCARD-->
 <cfinclude template="./included/cfcard.cfm">
     <!-- END SEAN'S STUFF -->
     
-    <div class="fixed-action-btn bottom-right icons-circle icons-bg-color fa-1x openCtrlPanel" id="openModal">
+    <div id="step3" class="fixed-action-btn bottom-right icons-circle icons-bg-color fa-1x openCtrlPanel" id="openModal">
     <i class="icon-pencil pad-20"></i>
     </div>
 
 </section>
-       
+           
 <cfinclude template="/includes/portal/footer-open.alfred">
 <!--- Cusotn scripts go here --->
 
@@ -71,6 +75,8 @@
 <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
 <script type="text/javascript" src="js/bootstrap-switch.js"></script>
+<script type="text/javascript" src="js/bootstrap-tour.min.js"></script>
+<script type="text/javascript" src="js/intro.min.js"></script>
 <script type="text/javascript" src="js/domJSFile.js"></script>
 <!--<script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js" integrity="sha256-WyjlLy3rvVSitHOXMctYkMCOU6GAletPg+qniNKLCQM=" crossorigin="anonymous"></script> -->
 <script src="js/resize.js"></script>
