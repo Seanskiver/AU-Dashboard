@@ -1,5 +1,5 @@
 //Make sure our file is loaded
-console.log('fomjs file loaded'); 
+console.log('domjs file loaded');
 
 //called when the modal is opened
 function initializeSwitches(){
@@ -30,16 +30,16 @@ function initializeSwitches(){
             });//end on switch change
         }//end for loop
     });//end get cards query
-    //Added this so we can hide some lag on the bootstrap switch initializtion
+    //Added this so we can hide some lag on the bootstrap switch initialization
     $('.modal-content').delay(300).fadeIn(1000);
 };//end InitializeFunction
 
 //Open the Control Panel and populate it with the proper switch settings
 $(".openCtrlPanel").on("tap",function(event){
     console.log("opening the modal");
-    //hide our modal content until it is loaded from the initialzation
+    //hide our modal content until it is loaded from the initialization
     $('.modal-content').fadeOut(0);
-    //call the method to pupulate the switches
+    //call the method to populate the switches
     $.get('cfc/test.cfc?method=getSwitchStates', function(result){
         var html = $.parseHTML(result);
         $('.insertSwitches').empty();
@@ -88,7 +88,7 @@ var tour = new Tour({
     debug: true,
     //all of our steps will show up in the center of the screen if the element cannot be found on the page.
     orphan: true,
-    //our actuall steps of the tour. Corolates to id's on the index page.
+    //our actual steps of the tour. Correlate to id's on the index page.
     //steps is treated as an array when using the tour.goTo(#) function
     steps: [
         {
@@ -144,7 +144,7 @@ var tour = new Tour({
             //index of 5
             element: "#step5",
             title: "Switches",
-            content: "These little do-dad's are the brains of the dashboard. They boss everything else around and tell things if they should be loved or not. Basicly they turn on your cards if you didn't get the metaphor.",
+            content: "These little do-dad's are the brains of the dashboard. They boss everything else around and tell things if they should be loved or not. Basically they turn on your cards if you didn't get the metaphor.",
             placement: "right auto",
             onNext: function (tour) {
                 $(".controlPanel").modal("hide");
@@ -154,7 +154,7 @@ var tour = new Tour({
             //index of 6
             element: "#step6",
             title: "It's the end and I'm sad",
-            content: "That concludes our tour of tour dashboard! I hope I didn't hurt your feelings and you took something away from this expereience! ~Love, your mystic tour buddy <3 P.S. Press 'End Tour' otherwise I'll keep on coming back to pester you!",
+            content: "That concludes our tour of tour dashboard! I hope I didn't hurt your feelings and you took something away from this experience! ~Love, your mystic tour buddy <3 P.S. Press 'End Tour' otherwise I'll keep on coming back to pester you!",
             placement: "bottom auto",
         }
 ]});
@@ -162,7 +162,7 @@ var tour = new Tour({
 // Initialize the tour
 tour.init();
 
-//This is here purly for testing. At somepoint the tour will need to be re-initialized with a help button
+//This is here purly for testing. At some point the tour will need to be re-initialized with a help button
 //or started if the user has never been on this page before.
 function startBSTour(){
     // Start the tour
