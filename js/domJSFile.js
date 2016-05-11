@@ -1,25 +1,23 @@
-console.log('hello world');
+//Make sure our file is loaded
+console.log('fomjs file loaded'); 
 
-// TODO: Make this more modular. 
-
+//called when the modal is opened
 function initializeSwitches(){
     var titles = [];
-    
-    $.get('cfc/test.cfc?method=switchInitialization', function(result){
-//        console.log(result);    
+    //call our switch initialization
+    $.get('cfc/test.cfc?method=switchInitialization', function(result){    
         titles = result.split(',');
+        //Loop though each record
         for(var i=0; i<titles.length; i++){
             //initialize the switch itself
             $("[name="+ titles[i] +"]").bootstrapSwitch();
             //itinialize the on switch change
             $("input[name="+ titles[i] +"]").on('switchChange.bootstrapSwitch', function(event, state) {
-//                console.log("switch name: " + this.name);
-                //console.log(this); // DOM element
-                //console.log(event); // jQuery event
-                //console.log(state); // true | false
                 if($(this).is(':checked')){
+                    //get the title and value for each switch
                     var cardTitle = this.name;
                     var hiddenValue = "false";  
+                    //update it in our database
                     $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
                 }else{
                     var cardTitle = this.name;
@@ -32,23 +30,29 @@ function initializeSwitches(){
             });//end on switch change
         }//end for loop
     });//end get cards query
-    $('.modal-content').delay(300).fadeIn(1000); //move this to .done to remove the lag in loading...
+    //Added this so we can hide some lag on the bootstrap switch initializtion
+    $('.modal-content').delay(300).fadeIn(1000);
 };//end InitializeFunction
 
 //Open the Control Panel and populate it with the proper switch settings
 $(".openCtrlPanel").on("tap",function(event){
-    console.log("open the modal");
+    console.log("opening the modal");
+    //hide our modal content until it is loaded from the initialzation
     $('.modal-content').fadeOut(0);
+    //call the method to pupulate the switches
     $.get('cfc/test.cfc?method=getSwitchStates', function(result){
         var html = $.parseHTML(result);
         $('.insertSwitches').empty();
         $('.insertSwitches').append(html);
         //$('.insertSwitches').innerHTML(html);
+        //call the initialize function
         initializeSwitches();
     });
+    //open the modal
     $(".controlPanel").modal();
 });
 
+//this does the same thing as above. We just call this on the bootstrap tour, which is the only time it is called
 function openCtrlPanel() {
     console.log("open the modal function");
     $('.modal-content').fadeOut(0);
@@ -64,12 +68,15 @@ function openCtrlPanel() {
 
 //When the 'X' on a card is taped we update what it was and make the changes
 $(".closeCard").on("tap",function(event){
-    var cardTitle = $(this).closest('.panel').find('.title').text();    
+    //find the closest panel that a card is in, find it's title, get the title
+    var cardTitle = $(this).closest('.panel').find('.title').text();
+    //set the hidden state
     var hiddenValue = true;
-    console.log(cardTitle);
+    //animate the hide
     $(this).closest('.panel').hide(250, function(){
         $(this).closest('.panel').remove();
     });
+    //update the database record to hidden
     $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
 });
 
@@ -77,8 +84,12 @@ $(".closeCard").on("tap",function(event){
 //docs: http://bootstraptour.com/api/
 //help for opening the modal with tour: http://stackoverflow.com/questions/35221860/bootstrap-tour-wont-load-on-a-modal
 var tour = new Tour({
+    //this tells us what the tour is doing and expecting in the console
     debug: true,
+    //all of our steps will show up in the center of the screen if the element cannot be found on the page.
     orphan: true,
+    //our actuall steps of the tour. Corolates to id's on the index page.
+    //steps is treated as an array when using the tour.goTo(#) function
     steps: [
         {
             //index of 0
@@ -86,7 +97,6 @@ var tour = new Tour({
             title: "Welcome to the Dashboard Tour!",
             content: "We'll be giving you a series of steps to show you how to use this page. 'Cause dumb people. Shall we begin?",
             placement: "auto",
-            orphan: true,
             backdrop: true,
         },
         {
@@ -103,6 +113,7 @@ var tour = new Tour({
             content: "You can also open your control panel with this nifty floating button! Look at that amazing thing! So, do it. Now. NOW!",
             placement: "left auto",
             onNext: function (tour) {
+                //see if the modal/control panel is open
                 if($('.controlPanel').hasClass('in') == true){
                     
                 }else{
@@ -151,47 +162,15 @@ var tour = new Tour({
 // Initialize the tour
 tour.init();
 
-//debug - remove (set to a button or trigger when done)
+//This is here purly for testing. At somepoint the tour will need to be re-initialized with a help button
+//or started if the user has never been on this page before.
 function startBSTour(){
     // Start the tour
     tour.end();
     tour.restart();
 };
-//debug - remove
-function stopTour(){
-    tour.end();
-}
 
-function startTour(){
-    var intro = introJs();
-      intro.setOptions({
-        steps: [
-          { 
-            intro: "Hello world!"
-          },
-          { 
-            intro: "You <b>don't need</b> to define element to focus, this is a floating tooltip."
-          },
-          {
-            element: document.querySelector('#step1'),
-            intro: "This is a tooltip.",
-            position: 'left'
-          },
-          {
-            element: document.querySelectorAll('#step2')[0],
-            intro: "Ok, wasn't that fun?",
-            position: 'right'
-          },
-          {
-            element: '#step3',
-            intro: 'More features, more fun.',
-            position: 'right'
-          }
-        ]
-      });
-      intro.start();
-};
-
+//This is for adding new cards when they are not hidden anymore. Needs some work.
 //When we close the Control Panel we need to re-populate the cards on screen to the new settings
 //more or less for adding cards.
 //$(".closeCtrlPanel").on("tap",function(event){
@@ -201,6 +180,11 @@ function startTour(){
 //        $('#page').append(html);
 //    });
 //});
+
+
+//*********************************************************************
+//Everything below this is left for widgets or add-ons
+//*********************************************************************
 
 //WEATHER API STUFF
 // v3.1.0

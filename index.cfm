@@ -2,7 +2,6 @@
 <!---Custom CSS--->
 <link href="css/bootstrap-switch.css" rel="stylesheet">
 <link href="css/bootstrap-tour.min.css" rel="stylesheet">
-<link href="css/introjs.min.css" rel="stylesheet">
 <link href="css/domCSSFile.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="css/cardStyle.css">
 <link rel="stylesheet" type="text/css" href="css/cardStyle.css">
@@ -21,6 +20,7 @@
 <cfinclude template="/includes/portal/menu.alfred">
 
 <!--- content goes here --->
+<!---Things for the cards --->
 <script src="https://code.jquery.com/jquery-1.12.1.min.js" integrity="sha256-I1nTg78tSrZev3kjvfdM5A5Ak/blglGzlaZANLPDl3I=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js" integrity="sha256-WyjlLy3rvVSitHOXMctYkMCOU6GAletPg+qniNKLCQM=" crossorigin="anonymous"></script> 
 <script src="js/resize.js"></script>
@@ -54,13 +54,11 @@
 <section id="modules" class="page-section light-bg border-tb">
     
 <!--Testing for the tour plugin. Will need to be implimented on a "help" button or on page load for first time-->
-    <button onclick="startTour()">Start the Tour!</button>
-    <button id="step6" onclick="startBSTour()">Start BS Tour!</button>
-    <button onclick="stopTour()">Stop BS Tour!</button>
+<!---Give an element an id of step# so it can be referenced in the tour-plug in --->
+    <button id="step6" onclick="startBSTour()">Start Tour!</button>
     
 <!--    CF INCLUDE SEAN'S CFCARD-->
 <cfinclude template="./included/cfcard.cfm">
-    <!-- END SEAN'S STUFF -->
     
     <div id="step3" class="fixed-action-btn bottom-right icons-circle icons-bg-color fa-1x openCtrlPanel" id="openModal">
     <i class="icon-pencil pad-20"></i>
@@ -69,14 +67,13 @@
 </section>
            
 <cfinclude template="/includes/portal/footer-open.alfred">
-<!--- Cusotn scripts go here --->
+<!--- Custom scripts go here --->
 
 <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
 <script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.1.0/jquery.simpleWeather.min.js"></script>
 <script type="text/javascript" src="js/bootstrap-switch.js"></script>
 <script type="text/javascript" src="js/bootstrap-tour.min.js"></script>
-<script type="text/javascript" src="js/intro.min.js"></script>
 <script type="text/javascript" src="js/domJSFile.js"></script>
 <!--<script src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js" integrity="sha256-WyjlLy3rvVSitHOXMctYkMCOU6GAletPg+qniNKLCQM=" crossorigin="anonymous"></script> -->
 <script src="js/resize.js"></script>
