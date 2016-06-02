@@ -5,63 +5,38 @@
 
 <body>
     <div id="page">
-
-        <!--- QUERY DB FOR ALL RESULTS --->
-        <cfquery name="GetAllCards" datasource="MyAuCards" result="allCards">
-            USE MyAuCards;
-            SELECT *
-            FROM dbo.cards
-        </cfquery>
-
-        <!--- QUERY USER-SPECIFIC DATA --->
-        <cfquery name="GetUserCards" datasource="MyAuCards" result="userCards">
-            USE MyAuCards;
-            SELECT *
-            FROM dbo.user_cards
-            WHERE username = '#GetAuthUser()#'
-        </cfquery>
-        
-        <cfif userCards.RecordCount EQ 0>
-            <cfloop query="GetAllCards">
-                <cfquery datasource="MyAuCards">
-                    INSERT INTO user_cards
-                    (username,card_id,card_parent,card_position,hidden,card_class)
-                     VALUES ('#GetAuthUser()#', #GetAllCards.id#, '#GetAllCards.parentDiv#', '#GetAllCards.position#', #GetAllCards.hidden#, '#GetAllCards.class#');
-                </cfquery>
-            </cfloop>         
-        </cfif>
     <!-- Page Loader -->
 
     
     <!-- QUERY DB FOR ALL RESULTS -->
     <cfquery name="cards" datasource="MyAuCards">
         USE MyAuCards;
-        SELECT *
-        FROM dbo.user_cards
-        INNER JOIN cards
-        ON user_cards.card_id = cards.id
-        WHERE user_cards.hidden = 0
-        AND username = '#GetAuthUser()#'
-        ORDER BY card_parent, card_position 
+        SELECT * 
+        FROM dbo.cards
+        WHERE hidden = 0
+        ORDER BY parentDiv, position
+
     </cfquery>
-
-
+    
     <!-- LEFT COLUMN -->
     <cfquery name="left" dbtype="query">
         SELECT * FROM cards
-        WHERE card_parent = 'left'
+        WHERE parentDiv = 'left'
+    	
     </cfquery>
     
     <!-- MIDDLE COLUMN -->
     <cfquery name="middle" dbtype="query">
         SELECT * FROM cards 
-        WHERE card_parent = 'middle'
+        WHERE parentDiv = 'middle'
+        
     </cfquery>
     
     <!-- RIGHT COLUMN -->
     <cfquery name="right" dbtype="query">
         SELECT * FROM cards
-        WHERE card_parent = 'right'
+        WHERE parentDiv = 'right'
+        
     </cfquery>
     
     <div id="container">
@@ -85,10 +60,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-body #card_class#">
-                            <div class="content">#Content#</div>
-                            <span class="arrow glyphicon glyphicon-chevron-down"></span>
-                        </div>
+                        <div class="panel-body #class#">#Content#</div>
                     </li>   
             </cfoutput> 	
             </cfloop>
@@ -114,11 +86,8 @@
                                     </cfif>
                                 </div>
                             </div>
-                        </div>     
-                        <div class="panel-body #card_class#">
-                            <div class="content">#Content#</div>
-                            <span class="arrow glyphicon glyphicon-chevron-down"></span>
                         </div>
+                        <div class="panel-body #class#">#Content#</div>
                     </li>   
             </cfoutput>     	
             </cfloop>
@@ -147,12 +116,7 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="panel-body #card_class#">
-                            <div class="content">#Content#</div>
-                            <span class="arrow glyphicon glyphicon-chevron-down"></span>
-                        </div>
-
+                        <div class="panel-body #class#">#Content#</div>
                     </li>   
             </cfoutput>     
             </cfloop>
@@ -167,7 +131,6 @@
             placeholder: 'placeholder',
             containment: 'document',
             revert: 'invalid',
-            handle: '.panel-heading',
             start: function(e, ui) {
                 //$( '#sortLeft, #sortRight, #sortMiddle').sortable( "refreshPositions" );
                 // $(ui.item).css('top', e.clientY);
@@ -226,6 +189,8 @@
                     console.log("name : " + title + " | Position: " + position + " | Parent: " + parent);
 
                     updatePosition(position, title, parent);
+
+                    
                 }				
 			}
         });

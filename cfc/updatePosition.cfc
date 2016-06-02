@@ -5,19 +5,22 @@
         <cfargument name="parent" default=url.parent>
         
         <cfquery name="shiftDown" datasource="MyAuCards">
-            UPDATE cards SET position = ABS(position+1)
-            WHERE position >= <cfqueryparam value="#position#">
+            UPDATE user_cards SET card_position = ABS(card_position+1)
+            WHERE card_position >= <cfqueryparam value="#position#">
         </cfquery>
 
         <cfquery name="shiftUp" datasource="MyAuCards">
-            UPDATE cards SET position = ABS(position-1)
-            WHERE position <= <cfqueryparam value="#position#">
+            UPDATE user_cards SET card_position = ABS(card_position-1)
+            WHERE card_position <= <cfqueryparam value="#position#">
         </cfquery>
 
         <cfquery name="update" datasource="MyAuCards">
-        	UPDATE cards 
-            SET position = <cfqueryparam value="#position#">, parentDiv = <cfqueryparam value="#parent#">
-            WHERE title = <cfqueryparam value="#title#">
+            UPDATE UC
+            SET UC.card_position = <cfqueryparam value="#position#">, UC.card_parent = <cfqueryparam value="#parent#">
+            FROM dbo.user_cards AS UC
+            INNER JOIN dbo.cards as C
+                ON UC.card_id = C.id
+            WHERE C.title = <cfqueryparam value="#title#">
         </cfquery>
 
         
@@ -34,9 +37,12 @@
             <cfargument name="title" default=url.title>
 
         <cfquery name="Height" datasource="MyAuCards">
-            UPDATE cards 
-            SET class = <cfqueryparam value="#className#">
-            WHERE title = <cfqueryparam value="#title#">
+            UPDATE UC
+            SET UC.card_class = <cfqueryparam value="#className#">
+            FROM dbo.user_cards AS UC
+            INNER JOIN dbo.cards as C
+                ON UC.card_id = C.id
+            WHERE C.title = <cfqueryparam value="#title#">
         </cfquery>
 
         <cfoutput>  

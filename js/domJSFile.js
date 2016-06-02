@@ -1,3 +1,4 @@
+
 //Make sure our file is loaded
 console.log('domjs file loaded');
 
@@ -7,6 +8,7 @@ function initializeSwitches(){
     //call our switch initialization
     $.get('cfc/test.cfc?method=switchInitialization', function(result){    
         titles = result.split(',');
+
         //Loop though each record
         for(var i=0; i<titles.length; i++){
             //initialize the switch itself
@@ -18,14 +20,24 @@ function initializeSwitches(){
                     var cardTitle = this.name;
                     var hiddenValue = "false";  
                     //update it in our database
-                    $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
+                    $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue, function(data) {
+                        console.log(cardTitle);
+                        console.log(hiddenValue);
+                    });
+
+                    $(".title:contains("+cardTitle+")").closest('.panel').show(250);
+                    //$(".title:contains("+cardTitle+")").closest('.panel').removeClass('hidden');
                 }else{
                     var cardTitle = this.name;
                     var hiddenValue = "true";
-                    $(".title:contains("+cardTitle+")").closest('.panel').hide(250, function(){
-                        $(this).closest('.panel').remove();
+                    $(".title:contains("+cardTitle+")").closest('.panel').hide(250);
+                    //$(".title:contains("+cardTitle+")").closest('.panel').addClass('hidden');
+                    $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue, function(data) {
+                        console.log(cardTitle);
+                        console.log(hiddenValue);
                     });
-                    $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
+
+
                 }//end if checked
             });//end on switch change
         }//end for loop
@@ -80,6 +92,7 @@ $(".closeCard").on("tap",function(event){
     $.get('cfc/test.cfc?method=updateHidden&cardTitle='+cardTitle+'&hiddenValue='+hiddenValue);
 });
 
+
 //Set the tour
 //docs: http://bootstraptour.com/api/
 //help for opening the modal with tour: http://stackoverflow.com/questions/35221860/bootstrap-tour-wont-load-on-a-modal
@@ -131,14 +144,9 @@ var tour = new Tour({
             onNext: function (tour) {
                 tour.goTo(5);
             },
-        },
-        {   
-            //index of 4
-            delay: 2000,  //needed to show the panel of the tour
-            element: "#step4",
-            title: "Control Panel",
-            content: "So, yeah, this is your control panel. It does things like, ya know... control things...",
-            placement: "bottom auto",
+            onPrev: function(tour) {
+                $(".controlPanel").modal("hide");
+            }
         },
         {
             //index of 5
@@ -156,6 +164,9 @@ var tour = new Tour({
             title: "It's the end and I'm sad",
             content: "That concludes our tour of tour dashboard! I hope I didn't hurt your feelings and you took something away from this experience! ~Love, your mystic tour buddy <3 P.S. Press 'End Tour' otherwise I'll keep on coming back to pester you!",
             placement: "bottom auto",
+            onPrev: function(tour) {
+                $(".controlPanel").modal("show");
+            }
         }
 ]});
 

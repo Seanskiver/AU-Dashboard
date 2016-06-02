@@ -15,9 +15,7 @@ $('.icon-minus11').click(function() {
 	// 		'opacity': 0
 	// 	})
 	// }
-
 	$(panelBody).toggleClass('minimized');
-	
 });
 
 

@@ -14,7 +14,8 @@
 <!-- Icomoon Icons -->
 <link href="css/icons.css" rel="stylesheet" />
 <link href="css/custom.css"/>
-<title>title:MyAU</title>
+<link href="css/thick-bg.css"  rel="stylesheet"/>
+<title>MyAU</title>
 <cfinclude template="/includes/portal/head-end.alfred">
 <cfinclude template="/includes/portal/header.alfred">
 <cfinclude template="/includes/portal/menu.alfred">
@@ -26,29 +27,7 @@
 <script src="js/resize.js"></script>
 <script src="js/minimize-close.js"></script>
 
-<!-- Start modal -->
-<div class="modal fade panel-info controlPanel" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div id="step4" class="modal-heading-style">
-        <a class="close close-btn close-color-white" data-dismiss="modal"><i class="icon-close3"></i></a>
-        <h4 class="panel-heading">Control Panel (Settings)</h4>
-      </div>
-      <div class="text-purple">
-        <h6 class="text-center">Click the switch to add or remove cards to your dashboard.</h6>
-        <ul id="step5" class="row insertSwitches" style="padding-bottom: 10px;">
-        <!--Body of the switches for control panel-->
-        </ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default closeCtrlPanel" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
- 
-</div>
-<!-- End Modal -->
+<cfinclude template="modal.cfm">
     
 <!-- Modules-->
 <section id="modules" class="page-section light-bg border-tb">
@@ -65,7 +44,7 @@
     </div>
 
 </section>
-           
+
 <cfinclude template="/includes/portal/footer-open.alfred">
 <!--- Custom scripts go here --->
 
@@ -79,3 +58,8 @@
 <script src="js/resize.js"></script>
 <script src="js/minimize-close.js"></script>
 <cfinclude template="/includes/portal/footer-close.alfred">
+<script>
+  $('#save').click(function() {
+    location.reload();
+  });
+</script>

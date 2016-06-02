@@ -99,3 +99,26 @@
 		padding: 0px;
 		overflow: hidden;
 	}
+
+
+	.panel-heading {
+		cursor: move;
+	}
+
+
+	.glyphicon-chevron-down {
+
+	}
+
+	.arrow {
+		width: 5%;
+		text-align: center;
+		margin-left: 95%;
+		background-color: #faf4e8;
+		cursor: pointer;		
+	}
+	
+	.content {
+		height: 90%;
+	}
+

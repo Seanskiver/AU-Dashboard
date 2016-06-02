@@ -55,7 +55,7 @@ $('.icon-resize-full-screen').click(function() {
 
  
 // Make div taller / smaller
-$('.panel-body').click(function() {
+$('.glyphicon-chevron-down').click(function() {
 	 // if(parseInt($(this).css('height')) < 500) {
 	 // 	//console.log('height: ' + $(this).css('height'));
 	 // 	$(this).animate( {
@@ -68,23 +68,35 @@ $('.panel-body').click(function() {
 	 // 	});
 	 // }
 	//}
-
+	
 	var className = "";
-	var title = $(this).parent().find('h3').text();
-
-	if ($(this).hasClass('short')) {
-		$(this).removeClass('short');
-		$(this).addClass('medium');
+	var title = $(this).parent().parent().find('.title').text();
+	console.log("Title: " + title);
+	if ($(this).closest('.panel-body').hasClass('short')) {
+		$(this).closest('.panel-body').removeClass('short');
+		$(this).closest('.panel-body').addClass('medium');
 		className = 'medium';
-	} else if ($(this).hasClass('medium')) {
-		$(this).removeClass('medium');
-		$(this).addClass('tall');
-		className='tall';
+		console.log('First If');
+	} else if ($(this).closest('.panel-body').hasClass('medium')) {
+		$(this).closest('.panel-body').removeClass('medium');
+		$(this).closest('.panel-body').addClass('tall');
 
-	} else if ($(this).hasClass('tall')) {
-		$(this).removeClass('tall');
-		$(this).addClass('short');
+		// Change Arrow to face upward
+		$(this).closest('.glyphicon').removeClass('glyphicon-chevron-down');
+		$(this).closest('.glyphicon').addClass('glyphicon-chevron-up');
+
+
+		className='tall';
+		console.log('Second If');
+
+	} else if ($(this).closest('.panel-body').hasClass('tall')) {
+		$(this).closest('.panel-body').removeClass('tall');
+		$(this).closest('.panel-body').addClass('short');
 		className = 'short';
+
+		// Switch Arrow to face downward
+		$(this).closest('.glyphicon').removeClass('glyphicon-chevron-up');
+		$(this).closest('.glyphicon').addClass('glyphicon-chevron-down');
 	}
 
 	updateSize(className, title);
@@ -92,4 +104,7 @@ $('.panel-body').click(function() {
 });
 
 
+$(function() {
+	$('.hideme').hide();
+});
 
