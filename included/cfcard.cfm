@@ -6,6 +6,8 @@
 <body>
     <div id="page">
 
+        
+        
         <!--- QUERY DB FOR ALL RESULTS --->
         <cfquery name="GetAllCards" datasource="MyAuCards" result="allCards">
             USE MyAuCards;
@@ -32,7 +34,46 @@
         </cfif>
     <!-- Page Loader -->
 
+
+        <cfif userCards.RecordCount LT GetAllCards.RecordCount>
+            <!--- Gets all rows in the cards table that dont exist in the user_cards table --->
+            <cfset count = 1>
+            <cfquery name="GetAllMissing" datasource="MyAuCards">
+                SELECT * FROM cards
+                WHERE 
+                <cfloop query="GetUserCards">
+                    id != #GetUserCards.card_id#
+                    <cfif count LT #GetUserCards.RecordCount#>
+                        AND 
+                    </cfif>
+         
+                   <cfset count=#count# +1>
+                </cfloop>
+            </cfquery>        
+
+
+            <!--- Loops through each record of the MissingRows query and inserts the rows that are missing from the user_cards table --->
+            <cfquery name="insert" datasource="MyAuCards">
+                <cfloop query="GetAllMissing">
+                    INSERT INTO user_cards (username, card_id, card_parent, card_position, hidden, card_class)
+                    VALUES (
+                        <cfqueryparam value="#GetAuthUser()#"           cfsqltype="CF_SQL_VARCHAR">,
+                        <cfqueryparam value="#GetAllMissing.id#"        cfsqltype="CF_SQL_INTEGER">, 
+                        <cfqueryparam value="#GetAllMissing.parentDiv#" cfsqltype="CF_SQL_VARCHAR">, 
+                        <cfqueryparam value="#GetAllMissing.position#"  cfsqltype="CF_SQL_INTEGER">, 
+                        <cfqueryparam value="#GetAllMissing.hidden#"    cfsqltype="CF_SQL_BIT">, 
+                        <cfqueryparam value="#GetAllMissing.class#"     cfsqltype="CF_SQL_VARCHAR">
+                    );            
+                </cfloop>
+            </cfquery>   
+        </cfif>
+
+
     
+
+
+
+
     <!-- QUERY DB FOR ALL RESULTS -->
     <cfquery name="cards" datasource="MyAuCards">
         USE MyAuCards;
@@ -116,7 +157,11 @@
                             </div>
                         </div>     
                         <div class="panel-body #card_class#">
-                            <div class="content">#Content#</div>
+                            <cfif #contentAddr# NEQ "">
+                                <div class="content"><cfinclude template="#contentAddr#"></div>
+                            <cfelse>
+                                <div class="content">#content#</div>
+                            </cfif>
                             <span class="arrow glyphicon glyphicon-chevron-down"></span>
                         </div>
                     </li>   
