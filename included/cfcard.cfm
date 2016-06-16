@@ -110,15 +110,13 @@
         <ul id="left" class="draggable">
             <cfloop query="left">
             <cfoutput>
-                <li class="panel panel-info #Title#">   
+                <li class="panel panel-info #Title# " >   
                         <div class="panel-heading">
                             <h3 class="title">#Title#</h3>
                             <div class="controls-ribbon">
                                 <div class="controls">
                                     <i class="icon-minus11"></i>
-                                    <cfif #resizable# EQ 1 AND #parentDiv# NEQ "left" AND #parentDiv# NEQ "right">
-                                        <i class="icon-resize-full-screen"></i>
-                                    </cfif>
+                                        <i class="icon-resize-full-screen" style="opacity:0; position:absolute"></i>
 
                                     <cfif #closable# EQ 1>
                                         <i class="icon-close3 closeCard"></i>
@@ -126,8 +124,16 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="panel-body #card_class#">
-                            <div class="content">#Content#</div>
+                            <cfif #contentAddr# NEQ "">
+                                <div class="content"><cfinclude template="#contentAddr#"></div>
+                            <cfelse>
+                                <div class="content">#content#</div>
+                            </cfif>
+                        </div>
+
+                        <div class="arrow-container">
                             <span class="arrow glyphicon glyphicon-chevron-down"></span>
                         </div>
                     </li>   
@@ -146,9 +152,8 @@
                                 <div class="controls">
                                     <i class="icon-minus11"></i>
 
-                                    <cfif #resizable# EQ 1 AND #parentDiv# NEQ "left" AND #parentDiv# NEQ "right">
                                         <i class="icon-resize-full-screen"></i>
-                                    </cfif>
+
 
                                     <cfif #closable# EQ 1>
                                         <i class="icon-close3 closeCard"></i>
@@ -162,6 +167,9 @@
                             <cfelse>
                                 <div class="content">#content#</div>
                             </cfif>
+                        </div>
+
+                        <div class="arrow-container">
                             <span class="arrow glyphicon glyphicon-chevron-down"></span>
                         </div>
                     </li>   
@@ -181,11 +189,8 @@
                                 <div class="controls">
                                     <i class="icon-minus11"></i>
 
-                                    <cfif #resizable# EQ 1 AND #parentDiv# NEQ "left" AND #parentDiv# NEQ "right">
-                                        <i class="icon-resize-full-screen"></i>
-                                    </cfif>
+                                    <i class="icon-resize-full-screen" style="opacity:0; position:absolute"></i>
 
-                                    
                                     <cfif #closable# EQ 1>
                                         <i class="icon-close3 closeCard"></i>
                                     </cfif>
@@ -194,10 +199,17 @@
                         </div>
                         
                         <div class="panel-body #card_class#">
-                            <div class="content">#Content#</div>
-                            <span class="arrow glyphicon glyphicon-chevron-down"></span>
+                            <cfif #contentAddr# NEQ "">
+                                <div class="content"><cfinclude template="#contentAddr#"></div>
+                            <cfelse>
+                                <div class="content">#content#</div>
+                            </cfif>
                         </div>
 
+                        <div class="arrow-container">
+                            <span class="arrow glyphicon glyphicon-chevron-down"></span>
+                        </div>
+                            
                     </li>   
             </cfoutput>     
             </cfloop>
@@ -228,10 +240,7 @@
         
             // Animates the snap into position
             end: function(e, ui) {
-                $(ui.placeholder).hide(100);
-                // If the div now belongs to a small column, take away the ability to resize it
-                
-        
+                $(ui.placeholder).hide(100);       
             },
             // ANimates the movement of other elements to get out of the way
             change: function(e, ui) {
@@ -249,8 +258,10 @@
 				
                 if( ui.item.css('width') < 400 + "px" ) {
                     removeResizing(ui.item);
+                    console.log('removeResizing()');
                 } else {
                     addResizing(ui.item);
+                    console.log('removeResizing()');
                 }
         
                 $(ui.item).removeClass('panel-short');

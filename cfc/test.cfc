@@ -83,10 +83,11 @@
         <cfoutput>
             <cfloop query="cards">
                 <!---Concatinate onto the string the title of each record --->
+                <cfset title = replace(#title#, "'", "")>
                 <cfset titleString &= "'" & #title# & "'," />
-
             </cfloop>
         </cfoutput>
+
         <cfreturn titleString>
     </cffunction>
     

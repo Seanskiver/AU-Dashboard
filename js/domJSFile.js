@@ -11,6 +11,8 @@ function initializeSwitches(){
 
         //Loop though each record
         for(var i=0; i<titles.length; i++){
+        
+
             //initialize the switch itself
             $("[name="+ titles[i] +"]").bootstrapSwitch();
             //itinialize the on switch change

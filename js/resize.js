@@ -1,33 +1,44 @@
 // Find and remove the resizing option of the div
 function removeResizing(element) {
-	console.log('removeResizing()');
-	$(element).find('.glyphicon-resize-horizontal').css({
+	$(element).find('.icon-resize-full-screen').css({
 		'position' : 'absolute',
 		'opacity': '0',
 		'pointer-events': 'none'
 	});
+	
 
 }
 
 // Adds the resizing option to the div 
 function addResizing(element) {
-	console.log('addResizing()');
-	$(element).find('.glyphicon-resize-horizontal').css({
+	$(element).find('.icon-resize-full-screen').css({
 		'position' : 'relative',
 		'opacity': '100',
 		'pointer-events': 'auto'
 	});
+
+
 }
 
 // document.ready function to get modules that are less than 400 pixels wide and remove the resizing option 
 $(document).ready(function() {
-	if ($('.panel-info').css('width') < '400' + 'px') {
-		$('.panel-info').find('.glyphicon-resize-horizontal').css({
-		'position' : 'absolute',
-		'opacity': '0',
-		'pointer-events': 'none'
-	});
-	}
+	var panels = $('.panel-info');
+
+
+		if($('.panel-info').parent().attr('id') == 'middle') {
+			console.log('middle');
+			addResizing($(this));
+		}
+
+
+	// if ($('.panel-info').css('width') < '400' + 'px') {
+	// 	console.log('REady');
+	// 	$('.panel-info').find('.icon-resize-full-screen').css({
+	// 	'position' : 'absolute',
+	// 	'opacity': '0',
+	// 	'pointer-events': 'none'
+	// });
+	//}
 
 
 
@@ -56,47 +67,43 @@ $('.icon-resize-full-screen').click(function() {
  
 // Make div taller / smaller
 $('.glyphicon-chevron-down').click(function() {
-	 // if(parseInt($(this).css('height')) < 500) {
-	 // 	//console.log('height: ' + $(this).css('height'));
-	 // 	$(this).animate( {
-	 // 		height: '+=250'
-	 // 		class: 'medium'
-	 // 	});
-	 // } else{
-	 // 	$(this).animate( {
-	 // 		height: '53'
-	 // 	});
-	 // }
-	//}
-	
+
 	var className = "";
 	var title = $(this).parent().parent().find('.title').text();
+
 	console.log("Title: " + title);
-	if ($(this).closest('.panel-body').hasClass('short')) {
-		$(this).closest('.panel-body').removeClass('short');
-		$(this).closest('.panel-body').addClass('medium');
+	//console.log($(this).pa('.panel-body').attr('class'));
+
+	console.log($(this).parent().siblings('.panel-body').attr('class'))
+	
+
+	if ($(this).parent().siblings('.panel-body').hasClass('short')) {
+		$(this).parent().siblings('.panel-body').removeClass('short');
+		$(this).parent().siblings('.panel-body').addClass('medium');
 		className = 'medium';
 		console.log('First If');
-	} else if ($(this).closest('.panel-body').hasClass('medium')) {
-		$(this).closest('.panel-body').removeClass('medium');
-		$(this).closest('.panel-body').addClass('tall');
+	} else if ($(this).parent().siblings('.panel-body').hasClass('medium')) {
+		$(this).parent().siblings('.panel-body').removeClass('medium');
+		$(this).parent().siblings('.panel-body').addClass('tall');
 
 		// Change Arrow to face upward
-		$(this).closest('.glyphicon').removeClass('glyphicon-chevron-down');
-		$(this).closest('.glyphicon').addClass('glyphicon-chevron-up');
+		$(this).removeClass('glyphicon-chevron-down');
+		$(this).addClass('glyphicon-chevron-up');
 
 
 		className='tall';
 		console.log('Second If');
 
-	} else if ($(this).closest('.panel-body').hasClass('tall')) {
-		$(this).closest('.panel-body').removeClass('tall');
-		$(this).closest('.panel-body').addClass('short');
+	} else if ($(this).parent().siblings('.panel-body').hasClass('tall')) {
+		$(this).parent().siblings('.panel-body').removeClass('tall');
+		$(this).parent().siblings('.panel-body').addClass('short');
 		className = 'short';
 
 		// Switch Arrow to face downward
-		$(this).closest('.glyphicon').removeClass('glyphicon-chevron-up');
-		$(this).closest('.glyphicon').addClass('glyphicon-chevron-down');
+		$(this).removeClass('glyphicon-chevron-up');
+		$(this).addClass('glyphicon-chevron-down');
+	} else {
+		$(this).parent().siblings('.panel-body').addClass('medium');
 	}
 
 	updateSize(className, title);
